@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Memos</title>
+<meta name="description" content="Talk. It becomes a memo on GitHub." />
+<link rel="manifest" href="manifest.webmanifest" />
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="Memos" />
+<meta name="theme-color" content="#171a21" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<header>
+  <h1>Memos</h1>
+  <button id="settingsBtn" class="icon-btn" title="Settings" aria-label="Settings">⚙</button>
+</header>
+
+<main>
+  <div id="pendingBanner" class="pending-banner hidden">
+    <span id="pendingText"></span>
+    <button id="syncBtn">Sync now</button>
+  </div>
+
+  <div id="recordView">
+    <div class="mic-wrap" id="micWrap">
+      <div class="mic-ring"></div>
+      <button id="micBtn" aria-label="Record memo">🎙</button>
+    </div>
+    <p id="status">Tap to start</p>
+    <div id="transcript" contenteditable="false"></div>
+  </div>
+
+  <div id="reviewView" class="review hidden">
+    <audio id="playback" controls></audio>
+    <textarea id="editText" placeholder="Your memo text..."></textarea>
+    <div class="row">
+      <button id="discardBtn" class="secondary">Discard</button>
+      <button id="saveBtn" class="primary">Save to GitHub</button>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <span id="repoLabel"></span>
+</footer>
+
+<dialog id="settingsDialog">
+  <h2>Settings</h2>
+  <label for="tokenInput">GitHub personal access token</label>
+  <input id="tokenInput" type="password" autocomplete="off" placeholder="ghp_..." />
+  <label for="repoInput">Repository (owner/repo)</label>
+  <input id="repoInput" type="text" placeholder="AugustoUrioste/Memos" />
+  <label for="branchInput">Branch</label>
+  <input id="branchInput" type="text" placeholder="main" />
+  <p class="hint">
+    The token is stored only in this browser (localStorage) and sent directly
+    from your phone to api.github.com — it never passes through any other
+    server. Create one at
+    github.com/settings/personal-access-tokens/new with read/write access to
+    "Contents" scoped to this repo only.
+  </p>
+  <div class="row">
+    <button id="settingsCancel" class="secondary">Cancel</button>
+    <button id="settingsSave" class="primary">Save</button>
+  </div>
+</dialog>
+
+<script src="app.js"></script>
+</body>
+</html>
